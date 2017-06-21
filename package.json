@@ -1,67 +1,34 @@
 {
-  "name": "web-docs-samples",
-  "description": "Web samples found on https://cloud.google.com.",
-  "version": "0.0.1",
-  "private": true,
-  "license": "Apache-2.0",
-  "author": "Google, Inc.",
-  "contributors": [
-    {
-      "name": "Tim Swast",
-      "email": "swast@google.com"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GoogleCloudPlatform/web-docs-samples.git"
-  },
-  "bugs": {
-    "url": "https://github.com/GoogleCloudPlatform/web-docs-samples/issues"
-  },
-  "homepage": "https://github.com/GoogleCloudPlatform/web-docs-samples#readme",
-  "semistandard": {
-    "globals": [
-      "$",
-      "assert",
-      "before",
-      "describe",
-      "Event",
-      "fail",
-      "FileReader",
-      "Image",
-      "it",
-      "processFile",
-      "XMLHttpRequest"
-    ],
-    "ignore": [
-      "**/node_modules/**",
-      "coverage/",
-      "vision/browser/key.js"
-    ]
+  "name": "prohib",
+  "version": "1.0.0",
+  "description": "prohib",
+  "dependencies": {},
+  "devDependencies": {
+    "clean-css": "^3.4.19",
+    "http-server": "^0.9.0",
+    "jshint": "^2.9.3",
+    "mocha": "^3.0.2",
+    "node-sass": "^3.10.0",
+    "nodemon": "^1.10.2",
+    "uglify-js": "^2.7.3",
+    "watch": "^0.19.2"
   },
   "scripts": {
-    "start": "http-server",
-    "karma_speech": "karma start speech/explore-api/karma.conf.js",
-    "karma_vision": "karma start vision/explore-api/karma.conf.js",
-    "lint": "semistandard \"**/*.js\"",
-    "test": "npm run lint && npm run karma_speech && npm run karma_vision"
+    "info": "echo 'npm as a build tool'",
+    "lint": "echo '=> linting' && jshint test/*.js",
+    "test": "echo '=> testing' && mocha test/*.js",
+    "minify:js": "echo '=> minify:js' && uglifyjs js/test.js -o dist/public/js/main.min.js",
+    "minify:css": "echo '=> minify:css' && cleancss css/style.css -o dist/public/css/main.min.css",
+    "html":   "cp index.html dist/public/",
+    "css":   "cp css/*.css dist/public/css",
+    "js":   "cp js/*.js dist/public/js",
+    "assets": "cp -R images/ dist/public/images/",
+    "build": "echo '=> building' && npm run test -s && npm run minify:js -s && npm run html && npm run assets && npm run css && npm run js ",
+    "build:sass": "node-sass sass/style.scss css/main.min.css",
+    "watch:sass": "npm run build:sass -- -w",
+    "pretest": "npm run lint -s",
+    "start": "http-server"
   },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "express": "^4.13.4",
-    "http-server": "^0.9.0",
-    "karma": "^1.1.1",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^1.0.1",
-    "karma-coverage": "^1.1.0",
-    "karma-detect-browsers": "^2.1.0",
-    "karma-firefox-launcher": "^1.0.0",
-    "karma-mocha": "^1.1.1",
-    "karma-phantomjs-launcher": "^1.0.1",
-    "karma-safari-launcher": "^1.0.0",
-    "karma-sinon": "^1.0.5",
-    "mocha": "^2.5.3",
-    "semistandard": "^8.0.0",
-    "sinon": "^1.17.7"
-  }
+  "author": "MediaCom",
+  "license": "Open"
 }
